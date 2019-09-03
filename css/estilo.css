@@ -1,0 +1,189 @@
+body, ul, li, p {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    font-family: Arial;
+    font-size: 1.2rem;
+}
+
+body{
+    margin-bottom: 100px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+h1 {
+   text-align: center;
+    margin-top: 100px;
+}
+
+/*Imagens Responsivas */
+img {
+    max-width: 100%; /*Imagens responsivas pra fazer elas aumentarem no maximo 100%*/
+    display: block;
+}
+
+.header {
+    background: #1d1e20; /*Cor do fundo*/
+    display: flex; /*Pra colocar um item do lado do outro do menu*/
+    justify-content: space-between; /*Pra dá espaço entre o Logo e o menu um na direita outro na esquerda*/
+    flex-wrap: wrap ; /*Isso serve pra quando a tela for pequena O menu vim pra baixo e o logo continuar na
+    parte de cima*/
+    align-items: center; /*Marca ficar alinhada ao centro LOGO*/
+    padding: 20px; /*Pra dá espaçamento em cima dos itens*/
+
+}
+.menu {
+    display: flex; /*Pra deixar ele um do lado do outro*/
+
+}
+.menu li {
+    margin-left: 10px; /*Pra da espaçamentos entre os menus */
+}
+.menu li a {
+    display: block;
+    padding: 10px;
+}
+
+/* CSS FLEXBOX */
+
+.flex {
+    display: flex; /*Pra deixar os itens um do lado do outro nesse caso a imagem*/
+    flex-wrap: wrap; /*Pra indicar que minhas imagens podem quebrar vindo pra debaixo quando a tela diminuir*/
+    max-width: 800px; /*Segurar o container  pegando de ponta a ponta, podemos fazer com que o container das imagens
+    tenham no maximo 800px de largura */
+    margin: 0 auto; /*Serve pra alinhar o conteudo ao centro quando passar de 800px */
+}
+
+.flex > div {
+    flex: 1 1 200px; /*Flex 1 pra ele se expandir, flex 1 pra ele ficar menor, flex 200px pra ele ter uma base
+    de 200px significa que ele sempre tem que ter essa base se ele não estiver 200px ele vai quebrar */
+    margin: 10px; /*Pra dá espaçamentos entre as imagens cima,baixo,esquerda,direita*/
+}
+
+/*CSS GRID LAYOUT 1*/
+
+.grid1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 800px; /*Segurar o container  pegando de ponta a ponta, podemos fazer com que o container das imagens
+    tenham no maximo 800px de largura */
+    padding: 10px;
+    margin: 0 auto; /*Serve pra alinhar o conteudo ao centro quando passar de 800px */
+    grid-gap: 20px; /*Pra da espaçamento entre as imagens ao inves de usar o padding usa-se o GRID-Gap*/
+}
+
+
+/*Pra separa as colunas */
+
+/*n+4 significa que quero que eu edite apartir do item quarto do quarto pra frente */
+.grid1 > div:nth-child(n+4) {
+    /*Pra poder falar com um dos filhos dessa div (podendo colocar qual numeração dentro
+    do paragrafo que ira selecionar a imagem que estiver na posição)*/
+    display: grid;
+    grid-template-columns: 1fr 1fr; /*Pra fazer as legendas ficarem ao lado da imagem não em baixo*/
+    grid-gap: 10px; /*Pra da espaçamento entre as imagens ao inves de usar o padding usa-se o GRID-Gap*/
+    align-items: center; /*Alinhar os itens ao centro*/
+}
+/*Pra poder possicionar a Imagem de ANUNCIO na primeira Coluna*/
+.grid1 > div.anuncio {
+    grid-column: 1; /*Primeira Coluna*/
+    grid-row: 2/ 5; /*Quero que o anuncio Vá da Linha 2 até a linha 5 GRID-Row 2/5 */
+    border-top: 10px solid tomato;
+    display: block;
+}
+
+/*Como não foi possivel deixar responsivo estilizando, Vamos usar Media Querie*/
+
+/*Responsivo Section grid 01*/
+
+@media (max-width: 600px) { /*Quando dor Abaixo de 600px vai aplicar o estilo abaixo*/
+    .grid1 {
+        grid-template-columns: repeat(2, 1fr); /*Eu tinha 3 colunas em tamanho normal, MAS abaixo de 600px vou
+        ter apenas 2 colunas*/
+
+    }
+
+    .grid1 > div:nth-child(n+4) {
+        display: block; /*Mudando pra display block, o display grid n+4 não será aplicado mais, assim fará com
+        que as imagens fiquem maior quando a tela estiver menor*/
+    }
+    /*Anuncio está ocupando 3 linhas, temos que consertar*/
+    .grid1 > div.anuncio {
+       grid-column: auto; /*Pra se posicionar automaticamente*/
+        grid-row: auto;
+        order: -1; /*Pra fazer o anuncio ser mostrado como primeiro*/
+    }
+}
+
+/*CSS GRI LAYOUT 2*/
+.grid2 {
+    display: grid;
+    grid-template-columns: 1fr 200px; /*Pra imagem expadar ou diminuar mais o sidebar fique fixo com 200px*/
+    grid-gap: 20px;
+    max-width: 800px;
+    padding: 10px;
+    margin: 0 auto;
+}
+.sidebar > div {
+    margin-bottom: 10px ;
+}
+
+/*Responsivo Section Grid 02*/
+@media (max-width: 600px) {
+    .grid2 {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: flex; /*Pra quando atingir o tamanho menor q 200px ficar um ao lado do outro*/
+        overflow: scroll;
+    }
+
+    .sidebar > div {
+        flex: 1 0 250px;
+        margin: 0 10px;
+
+    }
+}
+
+/*Section grid 3*/
+
+.grid3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /*Pra dividir em duas Colunas*/
+    grid-gap: 20px ;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 10px;
+}
+
+/*Pra falar com o primeiro Item teve que por uma classe pra cada item pra especificar pra poder falar com ele,
+via estilo css*/
+.grid3-item:nth-child(1) { /* nth-child ( ) Serve pra chamar o item, no caso colocando entre parenteses o numero
+da posição em que o item que você quer estilizar se encontra*/
+    grid-row: 1/3 ; /*Siginifica que o grid row que é linha. O tamanho da Imagem vai  ocupar da linha 1 ate a
+    linha 3*/
+}
+
+.grid3-item {
+    display: grid;
+}
+
+.grid3-item img {
+    grid-column: 1; /*Pra posicionar a imagem na primeira coluna */
+    grid-row: 1/3; /*Falando que a imagem vai da linha 1 a linha 3*/
+    align-self: end; /*Pra alinhar a legenda ao fim*/
+}
+
+.grid3-item p {
+    background:  rgba(0,0,0, 0.6);
+    padding: 10px;
+    color: white;
+    grid-column: 1; /* Posicionar a Legenda no grid collum 1 que na primeira coluna*/
+    grid-row: 2; /*Falando que a legenda vai ta na linha 2 */
+    align-self: end; /*Pra alinhar a legenda ao fim*/
+}
